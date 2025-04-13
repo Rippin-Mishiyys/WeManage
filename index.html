@@ -72,6 +72,69 @@
             </div>
 
             <!-- Main Content Column -->
+            <body class="p-4">
+    <div class="container">
+        <h1 class="mb-4">Statistics</h1>
+    <!--Will change colors we can decide what looks best-->
+    <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <div class="p-3 bg-warning text-dark rounded">
+                    <h4>Total Tasks</h4>
+                    <p id="totalTasks">0</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-primary text-dark rounded">
+                    <h4>Ongoing Tasks</h4>
+                    <p id="ongoingTasks">0</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3 bg-success text-dark rounded">
+                    <h4>Finished Tasks</h4>
+                    <p id="finishedTasks">0</p>
+                </div>
+            </div>
+        </div>
+
+        <h3>Overall Progress</h3>
+        <div class="progress">
+            <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+        </div>
+    </div>
+
+    <script>
+        //<!--Sample data for tasks-->
+        //<!--will replace this with actual data source-->
+        const tasks = [
+            { id: 1, status: 'finished' },
+            { id: 2, status: 'ongoing' },
+            { id: 3, status: 'finished' },
+            { id: 4, status: 'ongoing' },
+            { id: 5, status: 'finished' }
+        ];
+        //<!--Function to update statistics-->
+        function updateStats(taskList) {
+            const total = taskList.length;
+            const finished = taskList.filter(task => task.status === 'finished').length;
+            const ongoing = taskList.filter(task => task.status === 'ongoing').length;
+            //<!--Update the stats in the HTML-->
+            document.getElementById('totalTasks').textContent = total;
+            document.getElementById('ongoingTasks').textContent = ongoing;
+            document.getElementById('finishedTasks').textContent = finished;
+            //<!--Update progress bar-->
+            const percent = total > 0 ? Math.round((finished / total) * 100) : 0;
+            const progressBar = document.getElementById('progressBar');
+     
+            progressBar.style.width = percent + '%';
+            progressBar.setAttribute('aria-valuenow', percent);
+            progressBar.textContent = percent + '%';
+        }
+
+        updateStats(tasks);
+    </script>
+    </body>
+            
             <div class="col-10">
                 <div class="container scrollspy bg-body-tertiary p-3 rounded-2"  data-bs-spy="scroll" data-bs-target="#navbarstuff" data-bs-offset="0" data-bs-smooth-scroll="true" tabindex="100">
                     <div class="row">
